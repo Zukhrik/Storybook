@@ -1,19 +1,16 @@
-import {DeleteOutlined, HeartOutlined} from '@ant-design/icons';
+import {DeleteOutlined, HeartOutlined, CalculatorOutlined} from '@ant-design/icons';
 import type {Meta, StoryObj} from '@storybook/react';
-
 import {Button} from 'antd';
-
-const iconMap = {
-  delete: <DeleteOutlined/>,
-  heart: <HeartOutlined/>
-};
 
 // More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 const meta = {
   title: 'Example/Button',
   component: Button,
   parameters: {
-    layout: 'centered'
+    layout: 'centered',
+    controls: {
+      expanded: true
+    },
   },
   tags: ['autodocs'],
   argTypes: {
@@ -58,17 +55,12 @@ const meta = {
     },
     icon: {
       description: 'View of Button on it has Icon',
-      options: [undefined, ...Object.keys(iconMap)],
-      mappings: {
-        undefined,
-        ...iconMap
-      }
+      options: [undefined, "DeleteOutlined", "HeartOutlined", "CalculatorOutlined"],
+      mapping: { DeleteOutlined: <DeleteOutlined/>, HeartOutlined: <HeartOutlined/>, CalculatorOutlined: <CalculatorOutlined />},
+      control: 'select'
     }
   }
 } satisfies Meta<typeof Button>;
-
-export default meta;
-type Story = StoryObj<typeof meta>;
 
 // More on writing stories with args: https://storybook.js.org/docs/react/writing-stories/args
 export const PlayingWithButton: Story = {
@@ -80,3 +72,6 @@ export const PlayingWithButton: Story = {
     disabled: false
   }
 };
+
+export default meta;
+type Story = StoryObj<typeof meta>;
